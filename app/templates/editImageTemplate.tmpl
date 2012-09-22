@@ -1,0 +1,39 @@
+<div class='modal hide fade' id='editImageModal'>
+    <div class='modal-header'>
+      <h3>
+        {{#if name}}
+        Edit Image: {{name}}
+        {{else}}
+        New Image
+        {{/if}}
+      </h3>
+    </div>
+    <div class='modal-body'>
+      <form class='form' edit='{{#if name}}true{{else}}false{{/if}}' id='editImageForm'>
+        <div class='alert hide'></div>
+        <div class='span3'>
+          <div class='field'>
+            <label>Image Name:</label>
+            <input name='imageName' value='{{name}}' />
+          </div>
+          <div class='field'>
+            <label>Image Description:</label>
+            <textarea name='imageDescr' value='{{description}}'>{{description}}</textarea>
+          </div>
+        </div>
+        <div class='span3'>
+          <div class='field'>
+            <label>Image URL:</label>
+            <input name='imageURL' value='{{url}}' />
+          </div>
+          <a class='btn btn-blue uploadImage' href='javascript:;'>
+            Upload Image
+          </a>
+        </div>
+      </form>
+    </div>
+    <div class='modal-footer'>
+      <a class='btn cancel' data-dismiss='modal' href='javascript:;'>Cancel</a>
+      <a class='btn btn-green saveImage' data-groupName='{{groupName}}' data-imageName='{{name}}'>Save</a>
+    </div>
+  </div>

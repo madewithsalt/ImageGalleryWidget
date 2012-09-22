@@ -1,0 +1,92 @@
+  <div class='imageGroup' name='{{name}}'>
+    <div class='field groupTitle'>
+      <h3 class='groupName'>
+        <span>Image Group Name:</span>
+        <span class='name'>
+          {{name}}
+          <a class='edit' href='javascript:;'>
+            edit
+          </a>
+        </span>
+      </h3>
+      <input class='hidden' name='groupName' value='{{name}}' />
+      <div class='groupOrder pull-right'>
+        <h4>Group Order:</h4>
+        <a class='btn btn-small' href='javascript'>
+          <span class='icon-arrow-up'></span>
+          Up
+        </a>
+        <a class='btn btn-small' href='javascript'>
+          <span class='icon-arrow-down'></span>
+          Down
+        </a>
+      </div>
+    </div>
+    <div class='groupDetails'>
+      <div class='description'>
+        <div class='field'>
+          <label>Group Description</label>
+          <textarea name='groupDescription'></textarea>
+        </div>
+        <div class='field'>
+          <h4>Details Display Settings</h4>
+          <label>
+            <input name='showGroupDescription' type='checkbox' />
+            <span>Show Group Description on Website</span>
+          </label>
+          <label>
+            <input name='showImageNames' type='checkbox' />
+            <span>Show Image Names on Website</span>
+          </label>
+        </div>
+        <div class='field'>
+          <label>
+            <input name='showImageDescr' type='checkbox' />
+            <span>Show Image Descriptions on Website</span>
+          </label>
+        </div>
+      </div>
+      <div class='imageWidth'>
+        <div class='field'>
+          <label>
+            <span>Image Thumbnail Size</span>
+            <span class='small'>in pixels</span>
+          </label>
+          <input name='thumbSize' type='text' />
+        </div>
+        <div class='field thumbConstraint'>
+          <label>
+            <input name='thumbConstraint' type='radio' />
+            <span>
+              Wide
+              <span class='icon-move-horizontal'></span>
+            </span>
+          </label>
+          <label>
+            <input name='thumbConstraint' type='radio' />
+            <span>
+              High
+              <span class='icon-move-vertical'></span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id='groupImages'>
+      <h3>
+        Images
+        <span class='small'>
+          Rearrange images by dragging them around.
+        </span>
+      </h3>
+      <a class='btn btn-blue btn-small addImage' data-groupName='{{name}}' href='javascript:;'>
+        <span class='icon-image'></span>
+        Add a New Image
+      </a>
+      <div class='images'></div>
+    </div>
+    <a class='btn btn-red btn-small' href='javascript:;'>
+      <span class='icon-x'></span>
+      delete group
+    </a>
+  </div>
