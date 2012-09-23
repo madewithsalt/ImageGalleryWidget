@@ -11,9 +11,9 @@
 #   - dist/**/*.js
 #
 src_files:
-    - app/js/lib/*.js
-    - app/*.handlebars
-    - app/js/*.js
+    - public/javascripts/lib/*.js
+    - public/javascripts/*.handlebars
+    - public/javascripts/*.js
 
 # stylesheets
 #

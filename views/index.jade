@@ -1,0 +1,84 @@
+extends layout
+
+block scripts
+  script(type='text/javascript', src='javascripts/image_gallery_templates.handlebars')
+  script(type='text/javascript', src='javascripts/image_gallery.js')
+  script
+    var sampleData = {
+      "imageGroups": [
+          {
+            "name": "Test One",
+            "description": "a test image group!",
+            "images": [
+              {
+                "name": "A Fluffy Bunny",
+                "description": "It's a bunny, what do you want?",
+                "url": "http://cutepics.org/wp-content/uploads/2011/07/cute_fluffy_bunny.jpg"
+              },
+              {
+                "name": "A Fluffy Kitty",
+                "description": "It's a kitty, meow!",
+                "url": "http://www.dlocc.com/articles/wp-content/uploads/2010/07/fluffy-kitten.jpg"
+              }
+            ]
+          }
+      ]
+    };
+    var ig, gallery, imageGroup;
+
+    $(document).ready(function(){
+      ig = new ImageGallery('#imageGalleryUI', sampleData);
+      gallery = ig.Gallery;
+      imageGroup = gallery.imageGroups[0];
+
+    });
+
+
+block content
+  .span12
+    h1 Image Gallery Widget Demo
+
+  .widgetEdit#imageGalleryWidget.span12
+
+    form.form.form-horizontal(action='', method='POST')
+      .span12
+        .row
+          .span8
+            .row
+              .span4
+                .control-group
+                  label 
+                    h3 Gallery Name
+                    span.small
+                      Shown in Admin Only
+                  .control
+                    input(name='widget[name]', value='')
+              .span4
+                .control-group.showNavInput
+                  label
+                    input(type='checkbox', name='widget[showNav]')
+                    span.showNav Show Image Group Nav Bar
+                    span.small This will create links that jump to your image groups in your gallery. Helpful if you have a lot of images and groups!
+            .row
+              .span8
+                .control-group
+                  label 
+                    span Gallery Description
+                    span.small
+                      Shown in Admin Only
+                  textarea(name='widget[description]', value='')
+          .span4
+            .alert.alert-info
+              h4 Image Gallery Tip
+              p For best results, use images that are no larger than 1200px wide, or no larger than about 300KB in size. Larger images can load really slow in your visitor's browser.
+
+      .span12
+        h3.groupTitle Image Groups
+        h5 Image groups are collections of images. You can have one group for all your images, or divide your images by groups, such as "Kitchens" or "Weddings".
+        button.btn.btn-blue.newGroup 
+          span.icon-new-window Start A New Image Group
+      
+      .span12
+        div#imageGalleryUI
+
+        input.hide#imageGalleryData

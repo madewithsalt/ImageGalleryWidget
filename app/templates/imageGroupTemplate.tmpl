@@ -9,7 +9,7 @@
           </a>
         </span>
       </h3>
-      <input class='hidden' name='groupName' value='{{name}}' />
+      <input class='hide' name='groupName' value='{{name}}' />
       <div class='groupOrder pull-right'>
         <h4>Group Order:</h4>
         <a class='btn btn-small' href='javascript'>
@@ -72,13 +72,13 @@
         </div>
       </div>
     </div>
-    <div id='groupImages'>
-      <h3>
-        Images
-        <span class='small'>
-          Rearrange images by dragging them around.
-        </span>
-      </h3>
+    <div class='groupImages'>
+      <hgroup>
+          <h3>Images</h3>
+          <h5 class='small'>
+            Rearrange images by dragging them around.
+          </h5>
+      </hgroup>
       <a class='btn btn-blue btn-small addImage' data-groupName='{{name}}' href='javascript:;'>
         <span class='icon-image'></span>
         Add a New Image

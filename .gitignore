@@ -1,0 +1,17 @@
+#gedit Files
+*~
+
+#bundle bin stubs
+bin/*
+
+#hidden files shouldn't be added
+.*
+#except git files
+!.git*
+
+views/clients/*
+public/*
+
+#npm files
+tests/js/node_modules/*
+node_modules/*
