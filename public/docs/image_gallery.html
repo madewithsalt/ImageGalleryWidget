@@ -1,0 +1,424 @@
+<!DOCTYPE html>  <html> <head>   <title>image_gallery.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               image_gallery.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>IMAGE GALLERY WIDGET</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>An amazingly handy remove function created by John Resig of jQuery.
+TODO: Move this into a more global "useful things" script.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">remove</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Array Remove - By John Resig (MIT Licensed)</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">rest</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">slice</span><span class="p">((</span><span class="nx">to</span> <span class="o">||</span> <span class="nx">from</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">from</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="nx">from</span> <span class="o">:</span> <span class="nx">from</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">rest</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+
+<span class="kd">var</span> <span class="nx">ImageGallery</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parentContainer</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>will require the json-converted data hash to send to the dataModel
+example data: { "image" : "thing.jpg" }</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">galleryInputNode</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#imageGalleryData&#39;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>init the Gallery Model</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">this</span><span class="p">.</span><span class="nx">Gallery</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">ImageGroupModel</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">ImageModel</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>connect the input node to the dataSaver method</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">this</span><span class="p">.</span><span class="nx">Gallery</span><span class="p">.</span><span class="nx">dataSaver</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">Gallery</span><span class="p">,</span> <span class="nx">galleryInputNode</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>connect the views to the datamodel and init</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">this</span><span class="p">.</span><span class="nx">GalleryController</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">parentContainer</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">Gallery</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">ImageView</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">ImageGroupView</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>init any controllers</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="p">};</span>
+
+<span class="nx">ImageGallery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">Gallery</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">imageGroupModel</span><span class="p">,</span> <span class="nx">imageModel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>define the imageGroup model locally</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">this</span><span class="p">.</span><span class="nx">imageGroupModel</span> <span class="o">=</span> <span class="nx">imageGroupModel</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">imageModel</span> <span class="o">=</span> <span class="nx">imageModel</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>define the array to place imagegroup Models</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">this</span><span class="p">.</span><span class="nx">imageGroups</span> <span class="o">=</span> <span class="p">[];</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>build image Groups from the existing data.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">imageGroups</span> <span class="o">&amp;&amp;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">newGroup</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">createGroup</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newGroup</span><span class="p">);</span>
+      <span class="p">});</span>
+
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;datachange&#39;</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+
+
+  <span class="p">},</span>
+
+  <span class="nx">errorCodes</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
+      <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;No name entered. You have to give your images a unique name.&#39;</span><span class="p">,</span>
+      <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;That name is already taken, try another unique name.&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">galleries</span><span class="o">:</span> <span class="p">{</span>
+      <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;No name entered. You have to give your galleries a unique name.&#39;</span><span class="p">,</span>
+      <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;That name is already taken, try another unique name.&#39;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="nx">createGroup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>imageGroupObject is a JSON object,
+and must contain at least a UNIQUE name value.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">currentGroups</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">getImageGroups</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>check if this group we're adding is already in there.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">currentGroups</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">currentGroups</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">imageGroupObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">currentGroups</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">newGroup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">imageGroupModel</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">imageModel</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="nx">imageGroupObject</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+        <span class="nx">description</span><span class="o">:</span> <span class="nx">imageGroupObject</span><span class="p">.</span><span class="nx">description</span>
+      <span class="p">});</span>
+      </pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>bind save trigger to newGroup</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">$</span><span class="p">(</span><span class="nx">newGroup</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;updategallery&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">updateGallery</span><span class="p">,</span> <span class="nx">self</span><span class="p">));</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>if we know this object has images in it, 
+create those image objects too.</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+          <span class="nx">newGroup</span><span class="p">.</span><span class="nx">createImage</span><span class="p">({</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="nx">description</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
+            <span class="nx">url</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">url</span>
+          <span class="p">});</span>
+      <span class="p">});</span>
+
+      <span class="k">return</span> <span class="nx">newGroup</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>TODO: if the group name already exists, what do we do?
+for now, we call editGroup.</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nx">self</span><span class="p">.</span><span class="nx">editGroup</span><span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+  <span class="p">},</span>
+
+  <span class="nx">editGroup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>update an existing Group Object</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">existingGroup</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">getImageGroups</span><span class="p">();</span>
+
+    <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">existingGroup</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">self</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">idx</span><span class="p">);</span>
+          <span class="nx">self</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">createGroup</span><span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">));</span>
+          <span class="nx">$</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;datachange&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="p">},</span>
+
+  <span class="nx">deleteGroup</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>check if this group we're adding is already in there.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">groupIndex</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">imageGroupObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">idx</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">groupIndex</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">groupIndex</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;datachange&#39;</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+  <span class="p">},</span>
+
+  <span class="nx">getImageGroups</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="nx">getImageGroup</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">searchValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">knownGalleries</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">getImageGroups</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">targetName</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">searchValue</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">targetName</span> <span class="o">=</span> <span class="nx">searchValue</span><span class="p">;</span>
+    
+
+      <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">knownGalleries</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">targetName</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">){</span>
+            <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="o">:</span> <span class="nx">idx</span><span class="p">,</span> <span class="s2">&quot;object&quot;</span><span class="o">:</span> <span class="nx">val</span><span class="p">};</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+        
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="nx">getImage</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageName</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">knownGalleries</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">getImageGroups</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">imageGroup</span><span class="p">,</span> <span class="nx">targetName</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">imageName</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">targetName</span> <span class="o">=</span> <span class="nx">imageName</span><span class="p">;</span>
+      <span class="nx">imageGroup</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">getImageGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+    
+      <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">knownGalleries</span><span class="p">[</span><span class="nx">imageGroup</span><span class="p">.</span><span class="nx">index</span><span class="p">].</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">targetName</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="o">:</span> <span class="nx">idx</span><span class="p">,</span> <span class="s2">&quot;object&quot;</span><span class="o">:</span> <span class="nx">val</span><span class="p">}</span>
+          <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="nx">updateGallery</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;datachange&#39;</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="nx">parseGalleryData</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>parses the objects in the models
+back into the JSON format that Cookie expects to see.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">outputObject</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;imageGroups&quot;</span><span class="o">:</span> <span class="p">[]};</span>
+
+    <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">imageGroups</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">parsedGroup</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+          <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
+          <span class="s2">&quot;images&quot;</span><span class="o">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+      
+
+      <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+          <span class="nx">parsedGroup</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">].</span><span class="nx">push</span><span class="p">({</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
+            <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">url</span>
+          <span class="p">});</span>
+      <span class="p">});</span>
+
+      <span class="nx">outputObject</span><span class="p">[</span><span class="s2">&quot;imageGroups&quot;</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">parsedGroup</span><span class="p">);</span>
+
+    <span class="p">});</span>
+
+    
+
+    <span class="k">return</span> <span class="nx">outputObject</span><span class="p">;</span>
+
+  <span class="p">},</span>
+
+  <span class="nx">dataSaver</span><span class="o">:</span> <span class="p">{</span>
+
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dataModel</span><span class="p">,</span> <span class="nx">domNode</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>connects the data model to the dom element we "save" the JSON 
+object to so it can get saved back to the DB.</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">this</span><span class="p">.</span><span class="nx">domNode</span> <span class="o">=</span> <span class="nx">domNode</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">dataModel</span> <span class="o">=</span> <span class="nx">dataModel</span><span class="p">;</span>
+
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dataModel</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;datachange&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updateNode</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+    <span class="p">},</span>
+
+    <span class="nx">updateNode</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">stringValue</span><span class="p">;</span>
+
+      <span class="nx">stringValue</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dataModel</span><span class="p">.</span><span class="nx">parseGalleryData</span><span class="p">());</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">domNode</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="nx">stringValue</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>console.log('saved to input', stringValue);</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// end dataModel</span>
+
+<span class="nx">ImageGallery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">ImageGroupModel</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ImageModel</span><span class="p">,</span> <span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span>  <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">description</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">images</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">imageModel</span> <span class="o">=</span> <span class="nx">ImageModel</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">createImage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">newImage</span><span class="p">,</span> <span class="nx">existingImages</span><span class="p">,</span> <span class="nx">newImageIndex</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">settings</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">){</span>
+      <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">};</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">existingImages</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+      <span class="p">});</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">existingImages</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">};</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">newImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">imageModel</span><span class="p">(</span><span class="nx">settings</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newImage</span><span class="p">);</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;updategallery&#39;</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;object&quot;</span><span class="o">:</span> <span class="nx">newImage</span><span class="p">};</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">deleteImage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">imageObject</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>check if this group we're adding is already in there.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">imageIndex</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">imageObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">idx</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">imageIndex</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">imageIndex</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;updategallery&#39;</span><span class="p">);</span>
+
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">editImage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">imageObject</span><span class="p">,</span> <span class="nx">settings</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>update an existing Image Object</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">imageObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">self</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">idx</span><span class="p">);</span>
+          <span class="nx">self</span><span class="p">.</span><span class="nx">images</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">createImage</span><span class="p">(</span><span class="nx">imageObject</span><span class="p">,</span> <span class="nx">settings</span><span class="p">));</span>
+          <span class="nx">$</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">model</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;updategallery&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>    
+  <span class="p">};</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">getImages</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">getImage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">imageName</span> <span class="o">==</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="o">:</span> <span class="nx">idx</span><span class="p">,</span> <span class="s2">&quot;object&quot;</span><span class="o">:</span> <span class="nx">val</span><span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span> <span class="c1">// end ImageGroupModel</span>
+
+<span class="nx">ImageGallery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">ImageModel</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">url</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">groupName</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">groupName</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">description</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="p">};</span> <span class="c1">// end ImageModel</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>The ImageGallery Controller directs the UI events
+and sends the proper data along to the Models.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">ImageGallery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">GalleryController</span> <span class="o">=</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>TODO:
+- Unsaved Changes Listener
+- Ability to Rearrange Image Order
+- Ability to Rearrange Group Order
+- Concat the img description based on "charlimit"
+- confirmation displays on deletes</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parentContainer</span><span class="p">,</span> <span class="nx">Gallery</span><span class="p">,</span> <span class="nx">ImageView</span><span class="p">,</span> <span class="nx">ImageGroupView</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">gallery</span> <span class="o">=</span> <span class="nx">Gallery</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">parentContainer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">parentContainer</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">imageGroup</span> <span class="o">=</span> <span class="nx">ImageGroupView</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">ImageView</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>render the views</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">this</span><span class="p">.</span><span class="nx">renderAll</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">bindEvents</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>init triggers that the views will fire here.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hidemodal&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hideModal</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+
+  <span class="p">},</span>
+
+  <span class="nx">renderAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">imageGroups</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gallery</span><span class="p">.</span><span class="nx">getImageGroups</span><span class="p">();</span>
+
+    <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">imageGroups</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">newGroupView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">imageGroup</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">groupName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">parentContainer</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">newGroupView</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+        <span class="kd">var</span> <span class="nx">newGroupNode</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">parentContainer</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.imageGroup[name=&quot;&#39;</span><span class="o">+</span><span class="nx">groupName</span><span class="o">+</span><span class="s1">&#39;&quot;]&#39;</span><span class="p">);</span>
+
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="kd">var</span> <span class="nx">newImageView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">groupName</span> <span class="o">=</span> <span class="nx">groupName</span><span class="p">;</span>
+
+            <span class="nx">newGroupNode</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.images&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newImageView</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+
+  <span class="nx">renderImages</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">groupNode</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">parentContainer</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.imageGroup[name=&quot;&#39;</span><span class="o">+</span><span class="nx">groupName</span><span class="o">+</span><span class="s1">&#39;&quot;]&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">imageGroupObj</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">gallery</span><span class="p">.</span><span class="nx">getImageGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+    <span class="nx">groupNode</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.images&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">();</span>
+
+    <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">imageGroupObj</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">images</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">newImageView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">groupName</span> <span class="o">=</span> <span class="nx">groupName</span><span class="p">;</span>
+
+        <span class="nx">groupNode</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.images&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">newImageView</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+
+  <span class="nx">saveImageCheck</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">buttonNode</span><span class="p">,</span> <span class="nx">editMode</span><span class="p">,</span> <span class="nx">formValues</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <p>triggered when the "save" button is clicked in the modal</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">isEdit</span> <span class="o">=</span> <span class="nx">editMode</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">alertBox</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageModal&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">getImage</span><span class="p">,</span> <span class="nx">getImageGroup</span><span class="p">,</span> <span class="nx">imageGroupName</span><span class="p">,</span> <span class="nx">nameInput</span><span class="p">,</span> <span class="nx">newImage</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>get the values from the formValues Array
+imageName is required, and we won't continue without it.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">nameInput</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">formValues</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">val</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&quot;imageName&quot;</span>
+    <span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>clear any class states previously added to the alertbox.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">alertBox</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;alert-error alert-warning&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <p>first check if any name has been entered.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="nx">nameInput</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">value</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageModal&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;imageName&quot;]&#39;</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;.field&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;control-group error&#39;</span><span class="p">);</span>
+
+        <span class="nx">alertBox</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;alert-error&#39;</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">gallery</span><span class="p">.</span><span class="nx">errorCodes</span><span class="p">.</span><span class="nx">images</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">])</span>
+          <span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">imageGroupName</span> <span class="o">=</span> <span class="nx">buttonNode</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-groupName&#39;</span><span class="p">);</span>
+      <span class="nx">getImageGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">gallery</span><span class="p">.</span><span class="nx">getImageGroup</span><span class="p">(</span><span class="nx">imageGroupName</span><span class="p">);</span>
+      <span class="nx">getImage</span> <span class="o">=</span> <span class="nx">getImageGroup</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">getImage</span><span class="p">(</span><span class="nx">nameInput</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">value</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <p>if this is NOT an edit, and
+if imageName is the same as another image in this group,
+also throw an error and tell the user about it.</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">isEdit</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">getImage</span> <span class="o">!=</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageModal&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;imageName&quot;]&#39;</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;.field&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;control-group error&#39;</span><span class="p">);</span>
+
+        <span class="nx">alertBox</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;alert-error&#39;</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">gallery</span><span class="p">.</span><span class="nx">errorCodes</span><span class="p">.</span><span class="nx">images</span><span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">])</span>
+          <span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <p>it's edit mode and we found the image, hooray!</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">isEdit</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">getImage</span> <span class="o">!=</span> <span class="kc">false</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;im an edit!&quot;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">imageSettings</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">createImageJSON</span><span class="p">(</span><span class="nx">formValues</span><span class="p">);</span>
+        <span class="nx">getImageGroup</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">editImage</span><span class="p">(</span><span class="nx">getImage</span><span class="p">,</span> <span class="nx">imageSettings</span><span class="p">);</span>
+      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-34">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-34">&#182;</a>               </div>               <p>we're in the clear, create a new image!</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">isEdit</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">getImage</span> <span class="o">==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">newImage</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">createImageJSON</span><span class="p">(</span><span class="nx">formValues</span><span class="p">);</span>
+        <span class="nx">getImageGroup</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">createImage</span><span class="p">(</span><span class="nx">newImage</span><span class="p">);</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">renderImages</span><span class="p">(</span><span class="nx">imageGroupName</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">self</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;hidemodal&#39;</span><span class="p">);</span>
+
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">},</span>
+
+  <span class="nx">createImageJSON</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">formValues</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">imageObject</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">formValues</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&quot;imageName&quot;</span><span class="p">)</span> 
+          <span class="nx">imageObject</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&quot;imageDescr&quot;</span><span class="p">)</span>
+          <span class="nx">imageObject</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&quot;imageURL&quot;</span><span class="p">)</span>
+          <span class="nx">imageObject</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="nx">imageObject</span><span class="p">;</span>
+  <span class="p">},</span>
+
+  <span class="nx">bindEvents</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <p>new image modal</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#imageGalleryWidget&#39;</span><span class="p">).</span><span class="nx">delegate</span><span class="p">(</span><span class="s1">&#39;.addImage&#39;</span><span class="p">,</span> <span class="s1">&#39;click.addImage&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">groupName</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-groupName&#39;</span><span class="p">);</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">showImageModal</span><span class="p">({</span><span class="s1">&#39;groupName&#39;</span><span class="o">:</span> <span class="nx">groupName</span><span class="p">});</span>
+    <span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-36">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-36">&#182;</a>               </div>               <p>edit image modal</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#imageGalleryWidget&#39;</span><span class="p">).</span><span class="nx">delegate</span><span class="p">(</span><span class="s1">&#39;.editImage&#39;</span><span class="p">,</span> <span class="s1">&#39;click.editImage&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">imageName</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-imageName&#39;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">groupName</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-groupName&#39;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">targetImage</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">gallery</span><span class="p">.</span><span class="nx">getImage</span><span class="p">(</span><span class="nx">imageName</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">);</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">showImageModal</span><span class="p">(</span><span class="nx">targetImage</span><span class="p">.</span><span class="nx">object</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">delegate</span><span class="p">(</span><span class="s1">&#39;#editImageModal .saveImage&#39;</span><span class="p">,</span> <span class="s1">&#39;click.saveImage&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="kd">var</span> <span class="nx">editMode</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageForm&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;edit&#39;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">formValues</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageForm&#39;</span><span class="p">).</span><span class="nx">serializeArray</span><span class="p">();</span>
+
+      <span class="nx">self</span><span class="p">.</span><span class="nx">saveImageCheck</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="nx">editMode</span><span class="p">,</span> <span class="nx">formValues</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
+
+  <span class="nx">showImageModal</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">modalTemplate</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">templates</span><span class="p">[</span><span class="s1">&#39;editImageTemplate.tmpl&#39;</span><span class="p">];</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">modalTemplate</span><span class="p">(</span><span class="nx">params</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">));</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageModal&#39;</span><span class="p">).</span><span class="nx">modal</span><span class="p">();</span></pre></div>             </td>           </tr>                               <tr id="section-37">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-37">&#182;</a>               </div>               <p>destroy the modal when it closes.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageModal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hidden&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="p">});</span> 
+  <span class="p">},</span>
+
+  <span class="nx">hideModal</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#editImageModal&#39;</span><span class="p">).</span><span class="nx">modal</span><span class="p">(</span><span class="s2">&quot;hide&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+
+<span class="p">}</span> <span class="c1">// end GalleryController</span>
+
+<span class="nx">ImageGallery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">ImageGroupView</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">template</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">templates</span><span class="p">[</span><span class="s1">&#39;imageGroupTemplate.tmpl&#39;</span><span class="p">];</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageGroup</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">imageGroup</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">ImageGallery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">ImageView</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">template</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">templates</span><span class="p">[</span><span class="s1">&#39;imageTemplate.tmpl&#39;</span><span class="p">];</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">image</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">image</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

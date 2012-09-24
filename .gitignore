@@ -9,9 +9,6 @@ bin/*
 #except git files
 !.git*
 
-views/clients/*
-public/*
-
 #npm files
 tests/js/node_modules/*
 node_modules/*
