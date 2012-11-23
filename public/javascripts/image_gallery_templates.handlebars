@@ -1,23 +1,69 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['deleteImage.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='modal-header'>\n  <h3>\n    Delete Image: ";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\n  </h3>\n</div>\n<div class='modal-body'>\n  <form class='form' id='deleteImageForm'>\n    <div class='span3'>\n      <img src=\"";
+  foundHelper = helpers.url;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" />\n    </div>\n    <div class='span3'>\n      <p> Are you sure you want to delete ";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "?</p>\n      <p> (This doesn't delete it from your resource library.)</p>\n    </div>\n  </form>\n</div>\n<div class='modal-footer'>\n  <a class='btn cancel' data-dismiss='modal' href='javascript:;'>Cancel</a>\n  <a class='btn btn-red confirmDeleteImage' data-groupName='";
+  foundHelper = helpers.groupName;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.groupName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "' data-imageName='";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "'>Yes, Delete</a>\n</div>\n";
+  return buffer;});
+templates['deleteImageGroup.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='modal-header'>\n  <h3>\n    Delete Group: ";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\n  </h3>\n</div>\n<div class='modal-body'>\n      <h4> Are you sure you want to delete ";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "?</h4>\n      <p class=\"label label-important\">If there are any images in the group, they will also be deleted.</p>\n      <p>(You can find them again on the Resources page.)</p>\n</div>\n<div class='modal-footer'>\n  <a class='btn cancel' data-dismiss='modal' href='javascript:;'>Cancel</a>\n  <a class='btn btn-red confirmDeleteGroup' data-groupName='";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "'>Yes, Delete</a>\n</div>\n";
+  return buffer;});
 templates['editImageTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1, foundHelper;
-  buffer += "\n          Edit Image: ";
+  buffer += "\n    Edit Image: ";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\n        ";
+  buffer += escapeExpression(stack1) + "\n    ";
   return buffer;}
 
 function program3(depth0,data) {
   
   
-  return "\n          New Image\n        ";}
+  return "\n    New Image\n    ";}
 
 function program5(depth0,data) {
   
@@ -29,31 +75,51 @@ function program7(depth0,data) {
   
   return "false";}
 
-  buffer += "<div class='modal hide fade' id='editImageModal'>\n    <div class='modal-header'>\n      <h3>\n        ";
+function program9(depth0,data) {
+  
+  
+  return "\n            <p>You don't have any resources uploaded yet. You can add them <a href=\"/admin/resources/new\" target=\"_blank\">here.</a></p>\n        ";}
+
+function program11(depth0,data) {
+  
+  var buffer = "", stack1, foundHelper;
+  buffer += "\n          ";
+  foundHelper = helpers.partial;
+  stack1 = foundHelper ? foundHelper.call(depth0, "resourceSelector.tmpl", {hash:{}}) : helperMissing.call(depth0, "partial", "resourceSelector.tmpl", {hash:{}});
+  buffer += escapeExpression(stack1) + "\n        ";
+  return buffer;}
+
+  buffer += "<div class='modal-header'>\n  <h3>\n    ";
   stack1 = depth0.name;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n      </h3>\n    </div>\n    <div class='modal-body'>\n      <form class='form' edit='";
+  buffer += "\n  </h3>\n</div>\n<div class='modal-body'>\n  <form class='form' edit='";
   stack1 = depth0.name;
   stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data)});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "' id='editImageForm'>\n        <div class='alert hide'></div>\n        <div class='span3'>\n          <div class='field'>\n            <label>Image Name:</label>\n            <input name='imageName' value='";
+  buffer += "' id='editImageForm'>\n    <div class='alert hide'></div>\n    <div class='span6'>\n      <div class=\"field-group\">\n          <div class='field'>\n            <label>Image Name:</label>\n            <input name='imageName' value='";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' />\n          </div>\n          <div class='field'>\n            <label>Image Description:</label>\n            <textarea name='imageDescr' value='";
-  foundHelper = helpers.description;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "'>";
-  foundHelper = helpers.description;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</textarea>\n          </div>\n        </div>\n        <div class='span3'>\n          <div class='field'>\n            <label>Image URL:</label>\n            <input name='imageURL' value='";
+  buffer += escapeExpression(stack1) + "' />\n          </div>\n          <div class='field'>\n            <label>Image URL:</label>\n            <input name='imageURL' value='";
   foundHelper = helpers.url;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' />\n          </div>\n          <a class='btn btn-blue uploadImage' href='javascript:;'>\n            Upload Image\n          </a>\n        </div>\n      </form>\n    </div>\n    <div class='modal-footer'>\n      <a class='btn cancel' data-dismiss='modal' href='javascript:;'>Cancel</a>\n      <a class='btn btn-green saveImage' data-groupName='";
+  buffer += escapeExpression(stack1) + "' />\n          </div>\n      </div>\n      <div class='field-group'>\n        <div class=\"field\">\n          <label>Image Description:</label>\n          <input name='imageDescr' class=\"span6\" value='";
+  foundHelper = helpers.description;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "' />\n        </div>\n      </div>\n    </div>\n      <div class='span6' id=\"resourceManager\">\n        <h4>Or Select An Image from Resources</h4>\n\n        ";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.resImages;
+  stack1 = helpers.unless.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(9, program9, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        ";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.resImages;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(11, program11, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      </div>\n  </form>\n</div>\n<div class='modal-footer'>\n  <a class='btn cancel' data-dismiss='modal' href='javascript:;'>Cancel</a>\n  <a class='btn btn-green saveImage' data-groupName='";
   foundHelper = helpers.groupName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.groupName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -61,30 +127,132 @@ function program7(depth0,data) {
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "'>Save</a>\n    </div>\n  </div>\n";
+  buffer += escapeExpression(stack1) + "'>Save</a>\n</div>\n";
   return buffer;});
 templates['imageGroupTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
+function program1(depth0,data) {
+  
+  
+  return " \n            Hide \n          ";}
 
-  buffer += "  <div class='imageGroup' name='";
+function program3(depth0,data) {
+  
+  
+  return "\n            Show\n          ";}
+
+function program5(depth0,data) {
+  
+  
+  return " open";}
+
+function program7(depth0,data) {
+  
+  
+  return " checked ";}
+
+function program9(depth0,data) {
+  
+  
+  return " checked ";}
+
+function program11(depth0,data) {
+  
+  
+  return " checked ";}
+
+function program13(depth0,data) {
+  
+  
+  return " checked";}
+
+function program15(depth0,data) {
+  
+  
+  return " checked";}
+
+  buffer += "  <div class='imageGroup span9' name='";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "'>\n    <div class='field groupTitle'>\n      <h3 class='groupName'>\n        <span>Image Group Name:</span>\n        <span class='name'>\n          ";
+  buffer += escapeExpression(stack1) + "'>\n    <div class='field groupTitle'>\n      <h4 class='groupName'>\n        <span class='name'>\n          ";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\n          <a class='edit' href='javascript:;'>\n            edit\n          </a>\n        </span>\n      </h3>\n      <input class='hide' name='groupName' value='";
+  buffer += escapeExpression(stack1) + "\n          <a class='edit editGroupTitle' href='javascript:;' data-groupname='";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' />\n      <div class='groupOrder pull-right'>\n        <h4>Group Order:</h4>\n        <a class='btn btn-small' href='javascript'>\n          <span class='icon-arrow-up'></span>\n          Up\n        </a>\n        <a class='btn btn-small' href='javascript'>\n          <span class='icon-arrow-down'></span>\n          Down\n        </a>\n      </div>\n    </div>\n    <div class='groupDetails'>\n      <div class='description'>\n        <div class='field'>\n          <label>Group Description</label>\n          <textarea name='groupDescription'></textarea>\n        </div>\n        <div class='field'>\n          <h4>Details Display Settings</h4>\n          <label>\n            <input name='showGroupDescription' type='checkbox' />\n            <span>Show Group Description on Website</span>\n          </label>\n          <label>\n            <input name='showImageNames' type='checkbox' />\n            <span>Show Image Names on Website</span>\n          </label>\n        </div>\n        <div class='field'>\n          <label>\n            <input name='showImageDescr' type='checkbox' />\n            <span>Show Image Descriptions on Website</span>\n          </label>\n        </div>\n      </div>\n      <div class='imageWidth'>\n        <div class='field'>\n          <label>\n            <span>Image Thumbnail Size</span>\n            <span class='small'>in pixels</span>\n          </label>\n          <input name='thumbSize' type='text' />\n        </div>\n        <div class='field thumbConstraint'>\n          <label>\n            <input name='thumbConstraint' type='radio' />\n            <span>\n              Wide\n              <span class='icon-move-horizontal'></span>\n            </span>\n          </label>\n          <label>\n            <input name='thumbConstraint' type='radio' />\n            <span>\n              High\n              <span class='icon-move-vertical'></span>\n            </span>\n          </label>\n        </div>\n      </div>\n    </div>\n    <div class='groupImages'>\n      <hgroup>\n          <h3>Images</h3>\n          <h5 class='small'>\n            Rearrange images by dragging them around.\n          </h5>\n      </hgroup>\n      <a class='btn btn-blue btn-small addImage' data-groupName='";
+  buffer += escapeExpression(stack1) + "'>\n            edit\n          </a>\n        </span>\n      </h4>\n      <div class=\"editGroupName hidden\" data-groupname='";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' href='javascript:;'>\n        <span class='icon-image'></span>\n        Add a New Image\n      </a>\n      <div class='images'></div>\n    </div>\n    <a class='btn btn-red btn-small' href='javascript:;'>\n      <span class='icon-x'></span>\n      delete group\n    </a>\n  </div>";
+  buffer += escapeExpression(stack1) + "'>\n        <input class='groupNameInput' name='groupName' value='";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "' />\n        <a class=\"groupNameSave btn\"><i class=\"icon-ok\"></i></a>\n        <a class=\"groupNameCancel btn\"><i class=\"icon-remove\"></i></a>\n      </div>\n      <div class='groupOrder pull-right'>\n        <a class='orderLink' alt=\"Move Up\" href='javascript:;'>\n          <i class='icon-arrow-up'></i>\n        </a>\n        <a class='orderLink' alt=\"Move Down\" href='javascript:;'>\n          <i class='icon-arrow-down'></i>\n        </a>\n      </div>\n      <a class=\"groupDetailsToggle\" href=\"javascript:;\">\n        <span>\n          ";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.showDetails;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </span> Group Settings</a>\n    </div>\n    <div class='groupDetails";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.showDetails;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(5, program5, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "'>\n          <div class='description'>\n            <div class='field'>\n              <label>Description</label>\n              <textarea name='groupDescription' class=\"setting\">";
+  foundHelper = helpers.description;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</textarea>\n            </div>\n            <div class='field'>\n              <h4>Display Settings</h4>\n              <label>\n                <input name='showGrDescr' type='checkbox' class=\"setting\" ";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.showGrDescr;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(7, program7, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "/>\n                <span>Show Group Description</span>\n              </label>\n              <label>\n                <input name='showImgNames' type='checkbox' class=\"setting\" ";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.showImgNames;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(9, program9, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "/>\n                <span>Show Image Names</span>\n              </label>\n            </div>\n            <div class='field'>\n              <label>\n                <input name='showImgDescr' type='checkbox' class=\"setting\" ";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.showImgDescr;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(11, program11, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "/>\n                <span>Show Image Descriptions</span>\n              </label>\n            </div>\n          </div>\n          <div class='imageWidth'>\n            <div class='field'>\n              <label>\n                <span>Image Thumbnail Size</span>\n                <span class='small'>in pixels</span>\n              </label>\n              <input name='thumbSize' type='text' value=\"";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.thumbSize;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
+  buffer += escapeExpression(stack1) + "\" class=\"setting\"/>\n            </div>\n            <div class='field thumbConstraint'>\n                <label>\n                  <input name='";
+  foundHelper = helpers.id;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "_thumbConstr' class='setting' type='radio' ";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.constrWidth;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(13, program13, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += " value=\"wide\"/>\n                  <span>Wide <span class='icon-move-horizontal'></span></span>\n                </label>\n                <label>\n                  <input name='";
+  foundHelper = helpers.id;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "_thumbConstr' class='setting' type='radio' ";
+  stack1 = depth0.options;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.constrWidth;
+  stack1 = helpers.unless.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(15, program15, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += " value=\"high\"/>\n                  <span>High <span class='icon-move-vertical'></span></span>\n                </label>\n            </div>\n          </div>\n    </div>\n    <div id='groupImages'>\n      <div class=\"imagesHeader\">\n        <h3 class=\"imagesTitle\"> Images\n        <span class='small'>\n          Rearrange images by dragging them around.\n        </span></h3>\n      <a class='btn btn-info btn-small addImage' data-groupName='";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "' href='javascript:;'>\n        <i class='icon-picture'></i>\n        Add a New Image\n      </a>\n      </div>\n\n      <div class='images'></div>\n    </div>\n    <a class='btn btn-danger btn-small deleteGroup' data-groupName='";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "' href='javascript:;'>\n      <span class='icon-remove'></span>\n      delete group\n    </a>\n  </div>";
   return buffer;});
 templates['imageTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -95,6 +263,10 @@ templates['imageTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,p
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "' data-groupName='";
+  foundHelper = helpers.groupName;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.groupName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "'>\n    <div class='imgDetails'>\n      <h5>";
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
@@ -115,7 +287,7 @@ templates['imageTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,p
   foundHelper = helpers.url;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' />\n    </div>\n    <div class='buttons'>\n      <a class='btn btn-xsmall btn-blue editImage' data-groupName='";
+  buffer += escapeExpression(stack1) + "' />\n    </div>\n    <div class='buttons'>\n      <a class='editImage' data-groupName='";
   foundHelper = helpers.groupName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.groupName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -123,7 +295,7 @@ templates['imageTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,p
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' href='javascript:;'>edit</a>\n      <a class='btn btn-xsmall btn-red deleteImage' data-groupName='";
+  buffer += escapeExpression(stack1) + "' href='javascript:;'>edit</a>\n      <a class='deleteImage' data-groupName='";
   foundHelper = helpers.groupName;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.groupName; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -131,6 +303,83 @@ templates['imageTemplate.tmpl'] = template(function (Handlebars,depth0,helpers,p
   foundHelper = helpers.name;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "' href='javascript:;'>delete</a>\n    </div>\n</div>";
+  buffer += escapeExpression(stack1) + "' href='javascript:;'><i class=\"icon-remove\"></i></a>\n    </div>\n</div>";
+  return buffer;});
+templates['newImageGroup.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  
+
+
+  return "<div class='modal-header'>\n  <h3>Create A New Group</h3>\n</div>\n<div class='modal-body'>\n  <form class='form' id='newGroupForm'>\n    <div class='alert hide'></div>\n    <div class='span3'>\n      <div class='field'>\n        <label>Group Name:</label>\n        <input name='groupName' value='' />\n      </div>\n    </div>\n  </form>\n</div>\n<div class='modal-footer'>\n  <a class='btn cancel' data-dismiss='modal' href='javascript:;'>Cancel</a>\n  <a class='btn btn-green saveGroup'>Save</a>\n</div>\n";});
+templates['resourceList.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, foundHelper;
+  buffer += "\n      <li class=\"resource\" data-url=\"";
+  foundHelper = helpers.path;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.path; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.name;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</li>\n  ";
+  return buffer;}
+
+  buffer += "\n<ul class=\"row active\" data-page=\"";
+  foundHelper = helpers.currentPage;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.currentPage; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\">\n  ";
+  stack1 = depth0.resImages;
+  stack1 = helpers.each.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</ul>\n";
+  return buffer;});
+templates['resourceSelector.tmpl'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, self=this, functionType="function", escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <div class=\"resourcePages\">\n    <div class=\"paginator prev ";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.firstPage;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(2, program2, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">prev page</div>\n    <div class=\"counter\">page <span class=\"num\">";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.currentPage;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
+  buffer += escapeExpression(stack1) + "</span> of <span class=\"total\">";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.availPages;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
+  buffer += escapeExpression(stack1) + "</span></div>\n    <div class=\"paginator next ";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.lastPage;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(4, program4, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">next page</div>\n  </div>\n";
+  return buffer;}
+function program2(depth0,data) {
+  
+  
+  return "disabled";}
+
+function program4(depth0,data) {
+  
+  
+  return "disabled";}
+
+  buffer += "<div class=\"resourceList\">\n  <div class=\"wrapper\">\n\n  </div>\n</div>\n";
+  stack1 = depth0.resources;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.pages;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
   return buffer;});
 })();

@@ -24,13 +24,16 @@ block scripts
           }
       ]
     };
-    var ig, gallery, imageGroup;
 
     $(document).ready(function(){
-      ig = new ImageGallery('#imageGalleryUI', sampleData);
-      gallery = ig.Gallery;
-      imageGroup = gallery.imageGroups[0];
 
+      var imageGallery = new IG.ImageGallery({
+          data: sampleData,
+          inputNode: "#imageGalleryData",
+          parentContainer: "#imageGalleryUI"
+      });
+
+      var galleryController = new IG.GalleryController(imageGallery);
     });
 
 
